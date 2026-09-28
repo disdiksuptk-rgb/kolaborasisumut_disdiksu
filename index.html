@@ -1,0 +1,4781 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<base target="_top">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>
+Dashboard Monitoring GTK
+</title>
+<meta name="app-version" content="2026.09.28.2">
+
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+
+  font-family:
+  Arial,
+  Helvetica,
+  sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    #06265f,
+    #0b438f,
+    #082d69
+  );
+
+  color:#172b4d;
+
+  min-height:100vh;
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+#loginPage{
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+}
+
+
+.loginBox{
+
+  width:430px;
+
+  max-width:100%;
+
+  background:white;
+
+  border-radius:24px;
+
+  padding:38px;
+
+  box-shadow:
+  0 20px 60px
+  rgba(0,0,0,.35);
+
+  text-align:center;
+
+}
+
+
+.logo{
+
+  width:80px;
+
+  height:80px;
+
+  border-radius:50%;
+
+  margin:auto;
+
+  background:#12469b;
+
+  color:white;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:28px;
+
+  font-weight:bold;
+
+}
+
+
+.loginTitle{
+
+  font-size:25px;
+
+  font-weight:800;
+
+  margin-top:20px;
+
+  color:#0c3677;
+
+}
+
+
+.loginSub{
+
+  color:#687b99;
+
+  margin:8px 0 25px;
+
+}
+
+
+input,
+select{
+
+  width:100%;
+
+  padding:13px 14px;
+
+  border:1px solid #cbd5e1;
+
+  border-radius:10px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+input:focus,
+select:focus{
+
+  border-color:#1653a5;
+
+  box-shadow:
+  0 0 0 3px
+  rgba(22,83,165,.12);
+
+}
+
+
+.loginInput{
+
+  margin-bottom:12px;
+
+}
+
+
+.btn{
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:12px 18px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+}
+
+
+.btnPrimary{
+
+  width:100%;
+
+  background:#12499c;
+
+  color:white;
+
+  font-size:15px;
+
+}
+
+
+.btnPrimary:hover{
+
+  background:#0b377b;
+
+}
+
+
+.error{
+
+  color:#dc2626;
+
+  margin-top:14px;
+
+  font-size:14px;
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+#dashboardPage{
+
+  display:none;
+
+  min-height:100vh;
+
+  background:#f2f6fc;
+
+}
+
+
+.header{
+
+  background:
+  linear-gradient(
+    90deg,
+    #06265f,
+    #124da2
+  );
+
+  color:white;
+
+  padding:18px 28px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  box-shadow:
+  0 4px 15px
+  rgba(0,0,0,.15);
+
+}
+
+
+.headerTitle{
+
+  font-size:22px;
+
+  font-weight:800;
+
+}
+
+
+.headerSub{
+
+  font-size:13px;
+
+  opacity:.85;
+
+  margin-top:4px;
+
+}
+
+
+.userInfo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+
+.badge{
+
+  background:#ffffff20;
+
+  border:1px solid #ffffff40;
+
+  padding:8px 12px;
+
+  border-radius:20px;
+
+  font-size:13px;
+
+}
+
+
+.btnLogout{
+
+  background:#dc3545;
+
+  color:white;
+
+}
+
+
+.container{
+
+  padding:22px;
+
+  max-width:1600px;
+
+  margin:auto;
+
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.filterBox{
+
+  background:white;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  box-shadow:
+  0 4px 18px
+  rgba(30,60,100,.08);
+
+  margin-bottom:20px;
+
+}
+
+
+.filterTitle{
+
+  font-size:16px;
+
+  font-weight:800;
+
+  color:#123c78;
+
+  margin-bottom:14px;
+
+}
+
+
+.filters{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(6,1fr);
+
+  gap:12px;
+
+}
+
+
+.filterItem label{
+
+  display:block;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  color:#53657d;
+
+  margin-bottom:5px;
+
+}
+
+
+.filterActions{
+
+  display:flex;
+
+  align-items:end;
+
+  gap:8px;
+
+}
+
+
+.btnRefresh{
+
+  background:#12499c;
+
+  color:white;
+
+}
+
+
+.btnDownload{
+
+  background:#16803c;
+
+  color:white;
+
+}
+
+
+.btnReset{
+
+  background:#e5eaf2;
+
+  color:#19375e;
+
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.statusBar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:15px;
+
+  color:#65748a;
+
+  font-size:13px;
+
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(4,1fr);
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+}
+
+
+.card{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:20px;
+
+  box-shadow:
+  0 4px 18px
+  rgba(30,60,100,.08);
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:5px;
+
+  background:#1450a0;
+
+}
+
+
+.cardLabel{
+
+  font-size:13px;
+
+  color:#6a7890;
+
+}
+
+
+.cardValue{
+
+  font-size:31px;
+
+  font-weight:800;
+
+  color:#103d80;
+
+  margin-top:6px;
+
+}
+
+
+.cardSmall{
+
+  font-size:12px;
+
+  color:#7a8799;
+
+  margin-top:5px;
+
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.section{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:20px;
+
+  margin-bottom:20px;
+
+  box-shadow:
+  0 4px 18px
+  rgba(30,60,100,.08);
+
+}
+
+
+.sectionTitle{
+
+  font-size:18px;
+
+  font-weight:800;
+
+  color:#103d80;
+
+  margin-bottom:18px;
+
+}
+
+
+/* =========================================================
+   STAT ROW
+   ========================================================= */
+
+.statGrid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(4,1fr);
+
+  gap:12px;
+
+}
+
+
+.stat{
+
+  border-radius:12px;
+
+  background:#f3f7fd;
+
+  padding:15px;
+
+}
+
+
+.statName{
+
+  font-size:12px;
+
+  color:#62728a;
+
+}
+
+
+.statNumber{
+
+  font-size:25px;
+
+  font-weight:800;
+
+  color:#12499c;
+
+  margin-top:5px;
+
+}
+
+
+.progress{
+
+  height:8px;
+
+  background:#e2e8f0;
+
+  border-radius:10px;
+
+  margin-top:9px;
+
+  overflow:hidden;
+
+}
+
+
+.progress div{
+
+  height:100%;
+
+  background:#1761b3;
+
+  border-radius:10px;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.tableWrap{
+
+  overflow:auto;
+
+}
+
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:1000px;
+
+}
+
+
+th{
+
+  background:#0e3e82;
+
+  color:white;
+
+  padding:11px;
+
+  font-size:12px;
+
+  text-align:center;
+
+}
+
+
+td{
+
+  padding:10px;
+
+  border-bottom:1px solid #e7edf5;
+
+  font-size:12px;
+
+  text-align:center;
+
+}
+
+
+td:first-child{
+
+  text-align:left;
+
+}
+
+
+tr:hover td{
+
+  background:#f5f8fd;
+
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+  rgba(0,20,60,.55);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:999;
+
+}
+
+
+.loadingBox{
+
+  background:white;
+
+  padding:25px 35px;
+
+  border-radius:15px;
+
+  font-weight:bold;
+
+  color:#12499c;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1100px){
+
+  .filters{
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+  }
+
+  .cards{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+  }
+
+  .statGrid{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+  }
+
+}
+
+
+@media(max-width:700px){
+
+  .header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+  }
+
+  .filters{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .cards{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .statGrid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .container{
+
+    padding:12px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   AKSES SEKOLAH TANPA LOGIN - NPSN
+   ========================================================= */
+#loginPage{
+  flex-direction:column;
+  gap:18px;
+  padding:28px 18px 42px;
+}
+
+.npsnAccess{
+  width:min(760px, 100%);
+  max-width:100%;
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:24px;
+  box-shadow:0 18px 55px rgba(0,20,60,.25);
+}
+
+.npsnResult{
+  width:min(1100px, 100%);
+  max-width:100%;
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:24px;
+  box-shadow:0 18px 55px rgba(0,20,60,.25);
+}
+
+.npsnAccess{
+  padding:22px 26px;
+}
+
+.npsnAccess::before{
+  content:'AKSES PUBLIK SEKOLAH';
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:9px;
+  border-radius:999px;
+  background:#e8f1ff;
+  color:#12499c;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.8px;
+}
+
+.npsnTitle{
+  color:#082f6b;
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.npsnSub{
+  color:#63748e;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.npsnRow{
+  display:flex;
+  gap:10px;
+}
+
+.npsnRow input{
+  flex:1;
+  margin:0;
+  min-height:48px;
+  border:2px solid #d6e1f0;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.npsnButton{
+  width:auto;
+  min-width:150px;
+  white-space:nowrap;
+  background:linear-gradient(135deg,#0a4a9b,#1265c5);
+  color:#fff;
+  box-shadow:0 7px 18px rgba(18,73,156,.24);
+}
+
+.npsnButton:hover{transform:translateY(-1px);}
+
+.npsnMessage{
+  display:none;
+  margin-top:11px;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.npsnResult{
+  display:none;
+  padding:24px;
+}
+
+.npsnHead{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#06265f 0%,#0b438f 58%,#1670cf 100%);
+  color:white;
+  border-radius:18px;
+  padding:24px 26px;
+  margin-bottom:14px;
+  box-shadow:0 12px 28px rgba(6,38,95,.18);
+}
+
+.npsnHead::after{
+  content:'NPSN';
+  position:absolute;
+  right:24px;
+  top:18px;
+  width:66px;
+  height:66px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  font-weight:900;
+  font-size:12px;
+}
+
+.npsnHead h3{
+  margin:0 80px 6px 0;
+  font-size:24px;
+  line-height:1.2;
+}
+
+.npsnHead #schoolNpsn{
+  font-size:13px;
+  opacity:.88;
+  font-weight:700;
+}
+
+.npsnMeta{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.npsnMetaItem{
+  background:#f4f8ff;
+  border:1px solid #e0eaf7;
+  border-radius:12px;
+  padding:12px;
+  font-size:12px;
+}
+
+.npsnMetaItem strong{
+  display:block;
+  color:#62738d;
+  font-size:9px;
+  letter-spacing:.55px;
+  margin-bottom:4px;
+}
+
+.npsnMetaItem span{
+  display:block;
+  color:#123d78;
+  font-weight:800;
+  line-height:1.25;
+}
+
+.npsnYear{
+  margin:18px 0 9px;
+  padding:10px 13px;
+  border-left:5px solid #1260bc;
+  background:linear-gradient(90deg,#eaf3ff,#f8fbff);
+  color:#103d80;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+.npsnStats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.npsnStat{
+  background:linear-gradient(180deg,#ffffff,#f5f8fd);
+  border:1px solid #e0e7f0;
+  border-radius:12px;
+  padding:13px 9px;
+  text-align:center;
+  min-height:82px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.npsnStat b{
+  display:block;
+  color:#0d4da2;
+  font-size:24px;
+  line-height:1;
+}
+
+.npsnStat span{
+  display:block;
+  color:#62728a;
+  font-size:10px;
+  line-height:1.3;
+  margin-top:6px;
+  font-weight:700;
+}
+
+.npsnActions{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.npsnDownload{
+  flex:1;
+  background:linear-gradient(135deg,#0b7a4b,#119b61);
+  color:white;
+  min-height:46px;
+  box-shadow:0 8px 18px rgba(11,122,75,.18);
+}
+
+.npsnClose{
+  flex:1;
+  margin-top:0;
+  background:#e8edf5;
+  color:#29466e;
+  min-height:46px;
+}
+
+@media(max-width:900px){
+  .npsnMeta{grid-template-columns:1fr 1fr;}
+  .npsnStats{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:700px){
+  .npsnAccess,.npsnResult{width:100%; padding:18px;}
+  .npsnRow{flex-direction:column;}
+  .npsnButton{width:100%;}
+  .npsnMeta{grid-template-columns:1fr 1fr;}
+  .npsnActions{flex-direction:column;}
+  .npsnHead h3{font-size:20px;}
+}
+
+@media(max-width:480px){
+  .npsnMeta,.npsnStats{grid-template-columns:1fr 1fr;}
+  .npsnHead::after{display:none;}
+  .npsnHead h3{margin-right:0;}
+}
+
+
+
+/* =========================================================
+   AKSES PUBLIK - PENCARIAN NIK HONORER
+   ========================================================= */
+.nikAccess{
+  width:min(760px,100%);
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:24px;
+  box-shadow:0 18px 55px rgba(0,20,60,.25);
+  padding:22px 26px;
+}
+
+.nikAccess::before{
+  content:'AKSES PUBLIK HONORER';
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:9px;
+  border-radius:999px;
+  background:#e8f1ff;
+  color:#12499c;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.8px;
+}
+
+.nikTitle{
+  color:#082f6b;
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.nikSub{
+  color:#63748e;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.nikRow{
+  display:flex;
+  gap:10px;
+}
+
+.nikRow input{
+  flex:1;
+  margin:0;
+  min-height:48px;
+  border:2px solid #d6e1f0;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.nikButton{
+  width:auto;
+  min-width:150px;
+  white-space:nowrap;
+  background:linear-gradient(135deg,#0a4a9b,#1265c5);
+  color:#fff;
+  box-shadow:0 7px 18px rgba(18,73,156,.24);
+}
+
+.nikMessage{
+  display:none;
+  margin-top:11px;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.nikResult{
+  display:none;
+  width:min(760px,100%);
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:24px;
+  box-shadow:0 18px 55px rgba(0,20,60,.25);
+  padding:24px;
+}
+
+.nikSuccess{
+  border-left:6px solid #0b7a4b;
+  background:linear-gradient(135deg,#ecfdf5,#f7fffb);
+  border-radius:16px;
+  padding:22px;
+}
+
+.nikSuccessTitle{
+  color:#087443;
+  font-size:20px;
+  font-weight:900;
+  font-style:italic;
+  line-height:1.35;
+  margin-bottom:18px;
+}
+
+.nikInfo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.nikInfoItem{
+  background:#fff;
+  border:1px solid #dbe9e1;
+  border-radius:12px;
+  padding:13px;
+}
+
+.nikInfoItem strong{
+  display:block;
+  color:#68798c;
+  font-size:9px;
+  letter-spacing:.6px;
+  margin-bottom:5px;
+}
+
+.nikInfoItem span{
+  display:block;
+  color:#123d78;
+  font-size:14px;
+  font-weight:900;
+  line-height:1.3;
+}
+
+.nikPrivacy{
+  margin-top:13px;
+  color:#65748a;
+  font-size:11px;
+  line-height:1.45;
+}
+
+@media(max-width:700px){
+  .nikAccess,.nikResult{width:100%;padding:18px;}
+  .nikRow{flex-direction:column;}
+  .nikButton{width:100%;}
+  .nikInfo{grid-template-columns:1fr;}
+}
+
+
+/* =========================================================
+   TAMPILAN PUBLIK - 3 FITUR UTAMA BERJEJER
+   1. LOGIN  2. NIK  3. NPSN
+   ========================================================= */
+#loginPage{
+  width:100%;
+  max-width:1480px;
+  margin:0 auto;
+  min-height:100vh;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  gap:0;
+  padding:46px 28px 60px;
+}
+
+#loginPage::before{
+  content:'DASHBOARD MONITORING GTK';
+  color:#fff;
+  font-size:clamp(24px,3vw,38px);
+  font-weight:900;
+  letter-spacing:.3px;
+  text-align:center;
+  margin-bottom:8px;
+  text-shadow:0 4px 16px rgba(0,0,0,.2);
+}
+
+#loginPage::after{
+  content:'Dinas Pendidikan Provinsi Sumatera Utara';
+  color:rgba(255,255,255,.82);
+  font-size:14px;
+  font-weight:600;
+  text-align:center;
+  margin-top:-1px;
+  margin-bottom:28px;
+}
+
+#loginPage > .loginBox,
+#loginPage > .nikAccess,
+#loginPage > .npsnAccess{
+  width:100%;
+  max-width:none;
+  min-width:0;
+}
+
+/* kartu utama */
+#loginPage > .loginBox,
+#loginPage > .nikAccess,
+#loginPage > .npsnAccess{
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:24px;
+  box-shadow:0 18px 45px rgba(0,20,60,.22);
+}
+
+/* 3 kartu berjejer */
+#loginPage > .loginBox,
+#loginPage > .nikAccess,
+#loginPage > .npsnAccess{
+  display:block;
+}
+
+#loginPage > .loginBox{
+  grid-area:login;
+  text-align:center;
+  padding:28px 24px;
+}
+
+#loginPage > .nikAccess{
+  grid-area:nik;
+  padding:28px 24px;
+}
+
+#loginPage > .npsnAccess{
+  grid-area:npsn;
+  padding:28px 24px;
+}
+
+/* grid wrapper trick: make direct children align in one row */
+#loginPage{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-areas:
+    'heading heading heading'
+    'sub sub sub'
+    'login nik npsn';
+  align-content:start;
+  column-gap:20px;
+  row-gap:0;
+}
+
+/* pseudo heading placement */
+#loginPage::before{grid-area:heading;}
+#loginPage::after{grid-area:sub;}
+
+/* Login card */
+#loginPage > .loginBox{
+  align-self:start;
+}
+
+#loginPage > .loginBox .loginTitle{
+  font-size:20px;
+  margin-top:13px;
+}
+
+#loginPage > .loginBox .loginSub{
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+#loginPage > .loginBox .loginInput{
+  margin-bottom:10px;
+}
+
+#loginPage > .loginBox .btnPrimary{
+  min-height:44px;
+}
+
+/* ikon bulat */
+.featureLogo,
+.featureIcon{
+  width:72px;
+  height:72px;
+  margin:0 auto;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  line-height:1;
+  box-shadow:0 9px 22px rgba(18,73,156,.16);
+}
+
+.featureLogo{
+  background:linear-gradient(135deg,#083b82,#1769c9);
+  color:#fff;
+  border:5px solid #edf5ff;
+}
+
+.nikIcon{
+  background:linear-gradient(135deg,#0b7a4b,#16a269);
+  border:5px solid #ecfff7;
+}
+
+.npsnIcon{
+  background:linear-gradient(135deg,#7b4bb1,#a66bd6);
+  border:5px solid #f8f0ff;
+}
+
+.nikAccess::before,
+.npsnAccess::before{
+  display:block;
+  width:max-content;
+  margin:12px auto 8px;
+}
+
+.nikTitle,
+.npsnTitle{
+  text-align:center;
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.nikSub,
+.npsnSub{
+  text-align:center;
+  min-height:39px;
+}
+
+.nikRow,
+.npsnRow{
+  flex-direction:column;
+  gap:9px;
+}
+
+.nikButton,
+.npsnButton{
+  width:100%;
+  min-width:0;
+  min-height:44px;
+}
+
+.nikMessage,
+.npsnMessage{
+  text-align:center;
+}
+
+/* hasil tetap berada di bawah ketiga kartu */
+#loginPage > .nikResult,
+#loginPage > .npsnResult{
+  grid-column:1 / -1;
+  justify-self:center;
+  margin-top:22px;
+}
+
+/* hasil NIK dan NPSN jangan muncul sebelum pencarian */
+#loginPage > .nikResult{grid-row:auto;}
+#loginPage > .npsnResult{grid-row:auto;}
+
+@media(max-width:1050px){
+  #loginPage{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      'heading'
+      'sub'
+      'login'
+      'nik'
+      'npsn';
+    gap:16px;
+    padding:32px 18px 45px;
+  }
+
+  #loginPage > .loginBox,
+  #loginPage > .nikAccess,
+  #loginPage > .npsnAccess{
+    width:min(620px,100%);
+    justify-self:center;
+  }
+
+  #loginPage > .nikResult,
+  #loginPage > .npsnResult{
+    grid-column:1;
+  }
+}
+
+@media(max-width:600px){
+  #loginPage{
+    padding:25px 12px 35px;
+  }
+
+  #loginPage::before{
+    font-size:24px;
+  }
+
+  #loginPage::after{
+    font-size:12px;
+    margin-bottom:10px;
+  }
+
+  #loginPage > .loginBox,
+  #loginPage > .nikAccess,
+  #loginPage > .npsnAccess{
+    border-radius:20px;
+    padding:22px 18px;
+  }
+}
+
+
+/* =========================================================
+   HASIL PENCARIAN NIK - DATA HONORER
+   ========================================================= */
+.nikInfoThree{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:16px;
+}
+
+.nikInfoTwo{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:12px;
+}
+
+.nikInfoItem{
+  background:#f5f8fd;
+  border:1px solid #dce6f2;
+  border-radius:12px;
+  padding:14px 16px;
+  min-width:0;
+}
+
+.nikInfoItem strong{
+  display:block;
+  color:#526783;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:6px;
+}
+
+.nikInfoItem span{
+  display:block;
+  color:#103d80;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+
+@media(max-width:700px){
+  .nikInfoThree,
+  .nikInfoTwo{
+    grid-template-columns:1fr;
+  }
+}
+
+
+
+/* =========================================================
+   DATA GTK - TABEL DATA + EDIT CABDIS
+   ========================================================= */
+.gtkDataToolbar{
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) auto auto;
+  gap:10px;
+  align-items:end;
+  margin-bottom:15px;
+}
+
+.gtkSearchBox label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  color:#53657d;
+  margin-bottom:5px;
+}
+
+.gtkSearchRow{
+  display:flex;
+  gap:8px;
+}
+
+.gtkSearchRow input{
+  min-height:44px;
+}
+
+.gtkBtn{
+  min-height:44px;
+  white-space:nowrap;
+}
+
+.gtkBtnBlue{
+  background:#12499c;
+  color:#fff;
+}
+
+.gtkBtnGray{
+  background:#e7edf6;
+  color:#234267;
+}
+
+.gtkTableWrap{
+  overflow:auto;
+  border:1px solid #e1e8f2;
+  border-radius:12px;
+}
+
+.gtkTable{
+  min-width:1500px;
+}
+
+.gtkTable th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  white-space:nowrap;
+}
+
+.gtkTable td{
+  white-space:nowrap;
+  vertical-align:middle;
+}
+
+.gtkAction{
+  background:#f59e0b;
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  padding:7px 11px;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.gtkAction:hover{
+  background:#d97706;
+}
+
+.gtkReadOnly{
+  color:#64748b;
+  font-size:11px;
+  font-weight:700;
+}
+
+.gtkPagination{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.gtkPageInfo{
+  color:#64748b;
+  font-size:12px;
+  font-weight:700;
+}
+
+.gtkPageButtons{
+  display:flex;
+  gap:7px;
+}
+
+.gtkPageButtons button{
+  border:0;
+  border-radius:8px;
+  padding:8px 12px;
+  background:#e7edf6;
+  color:#173b69;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.gtkPageButtons button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* =========================================================
+   MODAL EDIT DATA GTK
+   ========================================================= */
+.gtkModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(3,20,55,.62);
+  padding:20px;
+  overflow:auto;
+}
+
+.gtkModalBox{
+  width:min(900px,100%);
+  margin:30px auto;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
+  overflow:hidden;
+}
+
+.gtkModalHead{
+  background:linear-gradient(135deg,#06265f,#1459ad);
+  color:#fff;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.gtkModalTitle{
+  font-size:18px;
+  font-weight:900;
+}
+
+.gtkModalSub{
+  font-size:11px;
+  opacity:.85;
+  margin-top:3px;
+}
+
+.gtkModalClose{
+  border:0;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.gtkModalBody{
+  padding:20px;
+}
+
+.gtkLocked{
+  background:#f1f5f9 !important;
+  color:#64748b !important;
+}
+
+.gtkFormGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.gtkFormItem label{
+  display:block;
+  color:#53657d;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.gtkFormItem.full{
+  grid-column:1 / -1;
+}
+
+.gtkFormItem input,
+.gtkFormItem select{
+  min-height:42px;
+}
+
+.gtkModalFoot{
+  padding:15px 20px 20px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  border-top:1px solid #edf1f6;
+}
+
+.gtkSave{
+  background:#0b7a4b;
+  color:#fff;
+}
+
+.gtkCancel{
+  background:#e7edf6;
+  color:#234267;
+}
+
+.gtkModalMessage{
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+  display:none;
+}
+
+@media(max-width:900px){
+  .gtkDataToolbar{
+    grid-template-columns:1fr 1fr;
+  }
+  .gtkSearchBox{
+    grid-column:1 / -1;
+  }
+}
+
+@media(max-width:650px){
+  .gtkDataToolbar{
+    grid-template-columns:1fr;
+  }
+  .gtkSearchBox{
+    grid-column:auto;
+  }
+  .gtkSearchRow{
+    flex-direction:column;
+  }
+  .gtkFormGrid{
+    grid-template-columns:1fr;
+  }
+  .gtkFormItem.full{
+    grid-column:auto;
+  }
+  .gtkModal{
+    padding:8px;
+  }
+  .gtkModalBox{
+    margin:10px auto;
+    border-radius:15px;
+  }
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     LOGIN
+     ======================================================= -->
+
+<div id="loginPage">
+
+  <div class="loginBox">
+
+    <div class="logo featureLogo loginLogo" aria-label="Login Dinas dan Cabang Dinas">
+      <span>🔐</span>
+    </div>
+
+    <div class="loginTitle">
+      DASHBOARD MONITORING
+    </div>
+
+    <div class="loginSub">
+      Guru & Tenaga Teknis<br>
+      Dinas Pendidikan Provinsi Sumatera Utara
+    </div>
+
+
+    <input
+      id="username"
+      class="loginInput"
+      type="text"
+      placeholder="Username"
+      autocomplete="username">
+
+
+    <input
+      id="password"
+      class="loginInput"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password">
+
+
+    <button
+      class="btn btnPrimary"
+      onclick="loginUser()">
+
+      MASUK
+
+    </button>
+
+
+    <div
+      id="loginError"
+      class="error">
+    </div>
+
+  </div>
+
+
+<!-- =====================================================
+     PENCARIAN HONORER BERDASARKAN NIK
+     ===================================================== -->
+
+<div class="nikAccess">
+
+  <div class="featureIcon nikIcon" aria-hidden="true">👤</div>
+
+  <div class="nikTitle">
+    CARI DATA BERDASARKAN NIK
+  </div>
+
+  <div class="nikSub">
+    Masukkan NIK untuk memeriksa apakah data sudah masuk
+    dalam Sistem Pemutakhiran Honorer.
+  </div>
+
+  <div class="nikRow">
+
+    <input
+      id="nikSearch"
+      type="text"
+      maxlength="16"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="NIK 16 digit"
+      oninput="formatNIK(this)"
+      onkeydown="if(event.key==='Enter'){event.preventDefault();cariDataNIK();}"
+    >
+
+    <button
+      type="button"
+      class="btn nikButton"
+      onclick="cariDataNIK()"
+    >
+      CARI NIK
+    </button>
+
+  </div>
+
+  <div id="nikMessage" class="nikMessage"></div>
+
+</div>
+
+<!-- =====================================================
+     HASIL PENCARIAN HONORER
+     NAMA | SEKOLAH | NPSN
+     NOMOR SK PERTAMA | TANGGAL SK PERTAMA
+     ===================================================== -->
+
+<div id="nikResult" class="nikResult" style="display:none;">
+
+  <div class="nikSuccess">
+
+    <div id="nikSuccessTitle" class="nikSuccessTitle">
+      ANDA SUDAH MENGISI DATA PEMUTAKHIRAN HONORER
+    </div>
+
+    <!-- BARIS 1 -->
+    <div class="nikInfo nikInfoThree">
+
+      <div class="nikInfoItem">
+        <strong>NAMA</strong>
+        <span id="nikNama">-</span>
+      </div>
+
+      <div class="nikInfoItem">
+        <strong>SEKOLAH</strong>
+        <span id="nikSekolah">-</span>
+      </div>
+
+      <div class="nikInfoItem">
+        <strong>NPSN</strong>
+        <span id="nikNpsn">-</span>
+      </div>
+
+    </div>
+
+    <!-- BARIS 2 -->
+    <div class="nikInfo nikInfoTwo">
+
+      <div class="nikInfoItem">
+        <strong>NOMOR SK PERTAMA</strong>
+        <span id="nikNomorSk">-</span>
+      </div>
+
+      <div class="nikInfoItem">
+        <strong>TANGGAL SK PERTAMA</strong>
+        <span id="nikTanggalSk">-</span>
+      </div>
+
+    </div>
+
+    <div class="nikPrivacy">
+      NIK tidak ditampilkan kembali pada hasil pencarian.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+       PENCARIAN SEKOLAH BERDASARKAN NPSN - TANPA LOGIN
+       ===================================================== -->
+  <div class="npsnAccess">
+    <div class="featureIcon npsnIcon" aria-hidden="true">🏫</div>
+    <div class="npsnTitle">CARI DATA SEKOLAH</div>
+    <div class="npsnSub">
+      Masukkan NPSN untuk melihat rekap sekolah. Tidak diperlukan login.
+    </div>
+
+    <div class="npsnRow">
+      <input id="npsnSearch"
+             type="text"
+             maxlength="8"
+             inputmode="numeric"
+             autocomplete="off"
+             placeholder="NPSN 8 digit"
+             oninput="formatNPSN(this)"
+             onkeydown="if(event.key==='Enter') cariSekolahNPSN();">
+      <button type="button"
+              class="btn npsnButton"
+              onclick="cariSekolahNPSN()">CARI NPSN</button>
+    </div>
+
+    <div id="npsnMessage" class="npsnMessage"></div>
+  </div>
+
+  <div id="npsnResult" class="npsnResult">
+    <div class="npsnHead">
+      <h3 id="schoolName">-</h3>
+      <div id="schoolNpsn">NPSN: -</div>
+    </div>
+
+    <div class="npsnMeta">
+      <div class="npsnMetaItem"><strong>KABUPATEN / KOTA</strong><span id="schoolKabupaten">-</span></div>
+      <div class="npsnMetaItem"><strong>CABANG DINAS</strong><span id="schoolCabdis">-</span></div>
+      <div class="npsnMetaItem"><strong>JENJANG</strong><span id="schoolJenjang">-</span></div>
+      <div class="npsnMetaItem"><strong>PEMUTAKHIRAN</strong><span id="schoolUpdate">-</span></div>
+    </div>
+
+    <div class="npsnYear">REKAP KESELURUHAN</div>
+    <div id="schoolAll" class="npsnStats"></div>
+
+    <div class="npsnYear">TAHUN 2020</div>
+    <div id="school2020" class="npsnStats"></div>
+
+        <div class="npsnYear">TAHUN 2021</div>
+    <div id="school2021" class="npsnStats"></div>
+
+    <div class="npsnYear">TAHUN 2022</div>
+    <div id="school2022" class="npsnStats"></div>
+
+        <div class="npsnYear">TAHUN 2023</div>
+    <div id="school2023" class="npsnStats"></div>
+
+    <div class="npsnYear">TAHUN 2024</div>
+    <div id="school2024" class="npsnStats"></div>
+
+    <div class="npsnYear">TAHUN 2025</div>
+    <div id="school2025" class="npsnStats"></div>
+
+    <div class="npsnYear">TAHUN 2026</div>
+    <div id="school2026" class="npsnStats"></div>
+
+    <div class="npsnActions">
+      <button type="button" class="btn npsnDownload" onclick="downloadSchoolExcelNPSN()">⬇ DOWNLOAD EXCEL SEKOLAH</button>
+      <button type="button" class="btn npsnClose" onclick="tutupNPSN()">TUTUP DATA SEKOLAH</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     DASHBOARD
+     ======================================================= -->
+
+<div id="dashboardPage">
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <div>
+
+      <div class="headerTitle">
+        DASHBOARD MONITORING GTK
+      </div>
+
+      <div
+        id="headerSub"
+        class="headerSub">
+        Dinas Pendidikan Provinsi Sumatera Utara
+      </div>
+
+    </div>
+
+
+    <div class="userInfo">
+
+      <div
+        id="userBadge"
+        class="badge">
+      </div>
+
+      <button
+        class="btn btnLogout"
+        onclick="logoutUser()">
+
+        Keluar
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="container">
+
+
+    <!-- ===================================================
+         FILTER
+         =================================================== -->
+
+    <div class="filterBox">
+
+      <div class="filterTitle">
+        FILTER PEMANTAUAN DATA
+      </div>
+
+
+      <div class="filters">
+
+
+        <!-- KABUPATEN -->
+
+        <div class="filterItem">
+
+          <label>
+            Kabupaten / Kota
+          </label>
+
+          <select
+            id="filterKabupaten"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Semua Kabupaten / Kota
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- JENJANG -->
+
+        <div class="filterItem">
+
+          <label>
+            Jenjang
+          </label>
+
+          <select
+            id="filterJenjang"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Semua Jenjang
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- TAHUN -->
+
+        <div class="filterItem">
+
+          <label>
+            Tahun
+          </label>
+
+          <select
+            id="filterTahun"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Semua Tahun
+            </option>
+
+            <option value="2020">
+              2020
+            </option>
+
+            <option value="2021">
+              2021
+            </option>
+
+            <option value="2022">
+              2022
+            </option>
+
+            <option value="2023">
+              2023
+            </option>
+
+
+            <option value="2024">
+              2024
+            </option>
+
+            <option value="2025">
+              2025
+            </option>
+
+            <option value="2026">
+              2026
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- JENIS -->
+
+        <div class="filterItem">
+
+          <label>
+            Jenis
+          </label>
+
+          <select
+            id="filterJenis"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Guru + Teknis/Tendik
+            </option>
+
+            <option value="GURU">
+              Guru
+            </option>
+
+            <option value="TEKNIS">
+              Teknis / Tendik
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DAPODIK -->
+
+        <div class="filterItem">
+
+          <label>
+            Status Dapodik
+          </label>
+
+          <select
+            id="filterDapodik"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Semua
+            </option>
+
+            <option value="SUDAH">
+              Sudah Dapodik
+            </option>
+
+            <option value="BELUM">
+              Belum Dapodik
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- SERTIFIKASI -->
+
+        <div
+          id="sertifikasiFilter"
+          class="filterItem">
+
+          <label>
+            Sertifikasi Guru
+          </label>
+
+          <select
+            id="filterSertifikasi"
+            onchange="loadDashboard()">
+
+            <option value="SEMUA">
+              Semua
+            </option>
+
+            <option value="SUDAH">
+              Sudah Sertifikasi
+            </option>
+
+            <option value="BELUM">
+              Belum Sertifikasi
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+      <div
+        class="filterActions"
+        style="margin-top:12px;">
+
+        <button
+          class="btn btnReset"
+          onclick="resetFilter()">
+
+          Reset Filter
+
+        </button>
+
+
+        <button
+          class="btn btnRefresh"
+          onclick="loadDashboard()">
+
+          ↻ Refresh
+
+        </button>
+
+
+        <button
+          id="downloadButton"
+          class="btn btnDownload"
+          onclick="downloadExcel()"
+          style="display:none;">
+
+          ↓ Download Excel
+
+        </button>
+
+        <button
+          id="gtkDataButton"
+          class="btn gtkBtn gtkBtnBlue"
+          onclick="scrollToGtkData()"
+          style="display:none;">
+
+          ✏ Data GTK / Edit
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         STATUS
+         =================================================== -->
+
+    <div class="statusBar">
+
+      <div id="scopeText">
+      </div>
+
+      <div>
+        Update:
+        <span id="updateTime">
+          -
+        </span>
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         KARTU UTAMA
+         =================================================== -->
+
+    <div class="cards">
+
+
+      <div class="card">
+
+        <div class="cardLabel">
+          TOTAL DATA
+        </div>
+
+        <div
+          id="total"
+          class="cardValue">
+          0
+        </div>
+
+        <div class="cardSmall">
+          Sesuai filter aktif
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="cardLabel">
+          GURU
+        </div>
+
+        <div
+          id="guru"
+          class="cardValue">
+          0
+        </div>
+
+        <div class="cardSmall">
+          Seluruh Guru
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="cardLabel">
+          TEKNIS / TENDIK
+        </div>
+
+        <div
+          id="teknis"
+          class="cardValue">
+          0
+        </div>
+
+        <div class="cardSmall">
+          Tenaga Teknis / Tendik
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="cardLabel">
+          GURU SUDAH DAPODIK
+        </div>
+
+        <div
+          id="guruDapodik"
+          class="cardValue">
+          0
+        </div>
+
+        <div
+          id="guruDapodikPct"
+          class="cardSmall">
+          0%
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         GURU
+         =================================================== -->
+
+    <div class="section">
+
+      <div class="sectionTitle">
+        STATISTIK GURU
+      </div>
+
+
+      <div class="statGrid">
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Sudah Dapodik
+          </div>
+
+          <div
+            id="gSudahDapodik"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+            <div
+              id="gSudahDapodikBar"
+              style="width:0%">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Belum Dapodik
+          </div>
+
+          <div
+            id="gBelumDapodik"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+            <div
+              id="gBelumDapodikBar"
+              style="width:0%">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Sudah Sertifikasi
+          </div>
+
+          <div
+            id="gSudahSertifikasi"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+            <div
+              id="gSudahSertifikasiBar"
+              style="width:0%">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Belum Sertifikasi
+          </div>
+
+          <div
+            id="gBelumSertifikasi"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+            <div
+              id="gBelumSertifikasiBar"
+              style="width:0%">
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         TEKNIS
+         =================================================== -->
+
+    <div class="section">
+
+      <div class="sectionTitle">
+        STATISTIK TEKNIS / TENDIK
+      </div>
+
+
+      <div class="statGrid">
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Total Teknis / Tendik
+          </div>
+
+          <div
+            id="tTotal"
+            class="statNumber">
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Sudah Dapodik
+          </div>
+
+          <div
+            id="tSudah"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+
+            <div
+              id="tSudahBar"
+              style="width:0%">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Belum Dapodik
+          </div>
+
+          <div
+            id="tBelum"
+            class="statNumber">
+            0
+          </div>
+
+          <div class="progress">
+
+            <div
+              id="tBelumBar"
+              style="width:0%">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="statName">
+            Dapodik Teknis
+          </div>
+
+          <div
+            id="tPct"
+            class="statNumber">
+            0%
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         REKAP CABDIS
+         =================================================== -->
+
+    <div
+      id="cabdisSection"
+      class="section"
+      style="display:none;">
+
+      <div class="sectionTitle">
+        REKAPITULASI CABANG DINAS I - XIV
+      </div>
+
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                CABANG DINAS
+              </th>
+
+              <th>
+                TOTAL
+              </th>
+
+              <th>
+                GURU
+              </th>
+
+              <th>
+                TEKNIS
+              </th>
+
+              <th>
+                GURU<br>SUDAH DAPODIK
+              </th>
+
+              <th>
+                GURU<br>BELUM DAPODIK
+              </th>
+
+              <th>
+                GURU<br>SUDAH SERTIFIKASI
+              </th>
+
+              <th>
+                GURU<br>BELUM SERTIFIKASI
+              </th>
+
+              <th>
+                TEKNIS<br>SUDAH DAPODIK
+              </th>
+
+              <th>
+                TEKNIS<br>BELUM DAPODIK
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody
+            id="cabdisTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         REKAP KABUPATEN / KOTA
+         =================================================== -->
+
+    <div class="section">
+
+      <div class="sectionTitle">
+        REKAPITULASI KABUPATEN / KOTA
+      </div>
+
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                KABUPATEN / KOTA
+              </th>
+
+              <th>
+                TOTAL
+              </th>
+
+              <th>
+                GURU
+              </th>
+
+              <th>
+                TEKNIS
+              </th>
+
+              <th>
+                GURU<br>DAPODIK
+              </th>
+
+              <th>
+                GURU<br>BELUM DAPODIK
+              </th>
+
+              <th>
+                GURU<br>SERTIFIKASI
+              </th>
+
+              <th>
+                GURU<br>BELUM SERTIFIKASI
+              </th>
+
+              <th>
+                TEKNIS<br>DAPODIK
+              </th>
+
+              <th>
+                TEKNIS<br>BELUM DAPODIK
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody
+            id="kabupatenTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         DATA GTK - CABDIS DAPAT LIHAT & EDIT
+         =================================================== -->
+    <div class="section" id="gtkDataSection">
+
+      <div class="sectionTitle">DATA GTK / TENAGA TEKNIS</div>
+
+      <div class="gtkDataToolbar">
+
+        <div class="gtkSearchBox">
+          <label>CARI DATA</label>
+          <div class="gtkSearchRow">
+            <input id="gtkSearch"
+                   type="text"
+                   placeholder="Cari Nama, NIK, NPSN, Sekolah, Kabupaten..."
+                   autocomplete="off"
+                   onkeydown="if(event.key==='Enter'){event.preventDefault();searchGtkRecords();}">
+            <button type="button" class="btn gtkBtn gtkBtnBlue" onclick="searchGtkRecords()">🔎 CARI</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn gtkBtn gtkBtnGray" onclick="clearGtkSearch()">
+          RESET PENCARIAN
+        </button>
+
+        <div class="gtkReadOnly" id="gtkEditInfo">
+          CABDIS dapat memperbaiki data pada baris miliknya.
+        </div>
+
+      </div>
+
+      <div class="gtkTableWrap">
+        <table class="gtkTable">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>NAMA</th>
+              <th>NIK</th>
+              <th>SEKOLAH</th>
+              <th>NPSN</th>
+              <th>KABUPATEN / KOTA</th>
+              <th>JENJANG</th>
+              <th>JENIS</th>
+              <th>STATUS DAPODIK</th>
+              <th>STATUS SERTIFIKASI</th>
+              <th>NOMOR SK PERTAMA</th>
+              <th>TANGGAL SK PERTAMA</th>
+              <th>AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="gtkDataTable">
+            <tr><td colspan="13">Silakan login untuk memuat data.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gtkPagination">
+        <div id="gtkPageInfo" class="gtkPageInfo">-</div>
+        <div class="gtkPageButtons">
+          <button type="button" id="gtkPrevBtn" onclick="changeGtkPage(-1)">‹ Sebelumnya</button>
+          <button type="button" id="gtkNextBtn" onclick="changeGtkPage(1)">Berikutnya ›</button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     MODAL EDIT DATA GTK
+     ======================================================= -->
+<div id="gtkEditModal" class="gtkModal">
+  <div class="gtkModalBox">
+
+    <div class="gtkModalHead">
+      <div>
+        <div class="gtkModalTitle">EDIT DATA GTK</div>
+        <div class="gtkModalSub">Perubahan akan langsung disimpan ke Spreadsheet.</div>
+      </div>
+      <button type="button" class="gtkModalClose" onclick="closeGtkEdit()">×</button>
+    </div>
+
+    <div class="gtkModalBody">
+      <input type="hidden" id="editRowNumber">
+
+      <div class="gtkFormGrid">
+
+        <div class="gtkFormItem">
+          <label>NIK (DIKUNCI)</label>
+          <input id="editNIK" class="gtkLocked" type="text" readonly>
+        </div>
+
+        <div class="gtkFormItem">
+          <label>CABANG DINAS (DIKUNCI)</label>
+          <input id="editCabdis" class="gtkLocked" type="text" readonly>
+        </div>
+
+        <div class="gtkFormItem">
+          <label>NAMA</label>
+          <input id="editNama" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>SEKOLAH</label>
+          <input id="editSekolah" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>NPSN</label>
+          <input id="editNpsn" type="text" maxlength="8" inputmode="numeric">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>KABUPATEN / KOTA</label>
+          <input id="editKabupaten" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>JENJANG</label>
+          <input id="editJenjang" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>JENIS</label>
+          <select id="editJenis">
+            <option value="GURU">GURU</option>
+            <option value="TEKNIS">TEKNIS</option>
+            <option value="TENDIK">TENDIK</option>
+            <option value="TEKNIS/TENDIK">TEKNIS/TENDIK</option>
+          </select>
+        </div>
+
+        <div class="gtkFormItem">
+          <label>PENGANGKATAN</label>
+          <input id="editPengangkatan" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>STATUS DAPODIK</label>
+          <select id="editDapodik">
+            <option value="SUDAH">SUDAH</option>
+            <option value="BELUM">BELUM</option>
+          </select>
+        </div>
+
+        <div class="gtkFormItem">
+          <label>STATUS SERTIFIKASI</label>
+          <select id="editSertifikasi">
+            <option value="SUDAH">SUDAH</option>
+            <option value="BELUM">BELUM</option>
+          </select>
+        </div>
+
+        <div class="gtkFormItem">
+          <label>NOMOR SK PERTAMA</label>
+          <input id="editNomorSk" type="text">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>TANGGAL SK PERTAMA</label>
+          <input id="editTanggalSk" type="date">
+        </div>
+
+        <div class="gtkFormItem">
+          <label>TAHUN SK PERTAMA</label>
+          <input id="editTahunSk" type="text" maxlength="4" inputmode="numeric">
+        </div>
+
+      </div>
+
+      <div id="gtkEditMessage" class="gtkModalMessage"></div>
+    </div>
+
+    <div class="gtkModalFoot">
+      <button type="button" class="btn gtkCancel" onclick="closeGtkEdit()">BATAL</button>
+      <button type="button" id="gtkSaveBtn" class="btn gtkSave" onclick="saveGtkEdit()">💾 SIMPAN PERUBAHAN</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =======================================================
+     LOADING
+     ======================================================= -->
+
+<div
+  id="loading"
+  class="loading">
+
+  <div class="loadingBox">
+    Memuat data...
+  </div>
+
+</div>
+
+
+
+<script>
+
+let token = '';
+
+let currentRole = '';
+
+let currentCabdis = '';
+
+let refreshTimer = null;
+
+
+// ==========================================================
+// LOGIN
+// ==========================================================
+
+function loginUser(){
+
+  const username =
+    document
+      .getElementById('username')
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById('password')
+      .value;
+
+  document
+    .getElementById('loginError')
+    .textContent = '';
+
+
+  if(!username || !password){
+
+    document
+      .getElementById('loginError')
+      .textContent =
+      'Username dan password wajib diisi.';
+
+    return;
+
+  }
+
+
+  showLoading();
+
+
+  google.script.run
+
+    .withSuccessHandler(function(res){
+
+      hideLoading();
+
+
+      if(!res.success){
+
+        document
+          .getElementById('loginError')
+          .textContent =
+          res.message;
+
+        return;
+
+      }
+
+
+      token =
+        res.token;
+
+      currentRole =
+        res.role;
+
+      currentCabdis =
+        res.cabdis;
+
+
+      document
+        .getElementById('loginPage')
+        .style.display =
+        'none';
+
+
+      document
+        .getElementById('dashboardPage')
+        .style.display =
+        'block';
+
+
+      document
+        .getElementById('userBadge')
+        .textContent =
+        res.role === 'DINAS'
+          ? 'DINAS PENDIDIKAN'
+          : res.cabdis;
+
+
+      document
+        .getElementById('headerSub')
+        .textContent =
+        res.role === 'DINAS'
+          ? 'Monitoring seluruh Cabang Dinas Provinsi Sumatera Utara'
+          : res.cabdis;
+
+
+      // Download hanya Cabdis
+
+      if(
+        res.role === 'CABDIS'
+      ){
+
+        document
+          .getElementById('downloadButton')
+          .style.display =
+          'inline-block';
+
+        document
+          .getElementById('gtkDataButton')
+          .style.display =
+          'inline-block';
+
+      } else {
+
+        document
+          .getElementById('gtkDataButton')
+          .style.display =
+          'none';
+
+      }
+
+
+      // Sertifikasi selalu tampil,
+      // tetapi statistik hanya Guru
+
+      loadDashboard();
+
+
+      // AUTO REFRESH 60 DETIK
+
+      if(refreshTimer){
+
+        clearInterval(
+          refreshTimer
+        );
+
+      }
+
+
+      refreshTimer =
+        setInterval(
+          function(){
+
+            loadDashboard(false);
+
+          },
+          60000
+        );
+
+
+    })
+
+    .withFailureHandler(function(err){
+
+      hideLoading();
+
+      document
+        .getElementById('loginError')
+        .textContent =
+        err.message;
+
+    })
+
+    .login(
+      username,
+      password
+    );
+
+}
+
+
+// ==========================================================
+// FILTER
+// ==========================================================
+
+function getFilters(){
+
+  return {
+
+    kabupaten:
+      document
+        .getElementById('filterKabupaten')
+        .value,
+
+    jenjang:
+      document
+        .getElementById('filterJenjang')
+        .value,
+
+    tahun:
+      document
+        .getElementById('filterTahun')
+        .value,
+
+    jenis:
+      document
+        .getElementById('filterJenis')
+        .value,
+
+    dapodik:
+      document
+        .getElementById('filterDapodik')
+        .value,
+
+    sertifikasi:
+      document
+        .getElementById('filterSertifikasi')
+        .value
+
+  };
+
+}
+
+
+// ==========================================================
+// LOAD DASHBOARD
+// ==========================================================
+
+function loadDashboard(showBusy = true){
+
+  if(!token){
+
+    return;
+
+  }
+
+
+  const filters =
+    getFilters();
+
+
+  if(showBusy){ showLoading(); }
+
+
+  google.script.run
+
+    .withSuccessHandler(function(res){
+
+      if(showBusy){ hideLoading(); }
+
+      renderDashboard(res);
+
+    })
+
+    .withFailureHandler(function(err){
+
+      if(showBusy){ hideLoading(); }
+
+      alert(
+        'Gagal memuat data:\n' +
+        err.message
+      );
+
+    })
+
+    .getDashboard(
+      token,
+      filters
+    );
+
+}
+
+
+// ==========================================================
+// RENDER DASHBOARD
+// ==========================================================
+
+function renderDashboard(res){
+
+  const s =
+    res.stats;
+
+
+  // ========================================================
+  // KARTU
+  // ========================================================
+
+  setText(
+    'total',
+    formatNumber(s.total)
+  );
+
+  setText(
+    'guru',
+    formatNumber(s.guru)
+  );
+
+  setText(
+    'teknis',
+    formatNumber(s.teknis)
+  );
+
+  setText(
+    'guruDapodik',
+    formatNumber(s.guruDapodik)
+  );
+
+
+  const guruPct =
+    percentage(
+      s.guruDapodik,
+      s.guru
+    );
+
+
+  setText(
+    'guruDapodikPct',
+    guruPct + '% dari Guru'
+  );
+
+
+  // ========================================================
+  // GURU
+  // ========================================================
+
+  setText(
+    'gSudahDapodik',
+    formatNumber(
+      s.guruDapodik
+    )
+  );
+
+  setText(
+    'gBelumDapodik',
+    formatNumber(
+      s.guruBelumDapodik
+    )
+  );
+
+  setText(
+    'gSudahSertifikasi',
+    formatNumber(
+      s.guruSertifikasi
+    )
+  );
+
+  setText(
+    'gBelumSertifikasi',
+    formatNumber(
+      s.guruBelumSertifikasi
+    )
+  );
+
+
+  setBar(
+    'gSudahDapodikBar',
+    percentage(
+      s.guruDapodik,
+      s.guru
+    )
+  );
+
+  setBar(
+    'gBelumDapodikBar',
+    percentage(
+      s.guruBelumDapodik,
+      s.guru
+    )
+  );
+
+  setBar(
+    'gSudahSertifikasiBar',
+    percentage(
+      s.guruSertifikasi,
+      s.guru
+    )
+  );
+
+  setBar(
+    'gBelumSertifikasiBar',
+    percentage(
+      s.guruBelumSertifikasi,
+      s.guru
+    )
+  );
+
+
+  // ========================================================
+  // TEKNIS
+  // ========================================================
+
+  setText(
+    'tTotal',
+    formatNumber(
+      s.teknis
+    )
+  );
+
+  setText(
+    'tSudah',
+    formatNumber(
+      s.teknisDapodik
+    )
+  );
+
+  setText(
+    'tBelum',
+    formatNumber(
+      s.teknisBelumDapodik
+    )
+  );
+
+
+  const teknisPct =
+    percentage(
+      s.teknisDapodik,
+      s.teknis
+    );
+
+
+  setText(
+    'tPct',
+    teknisPct + '%'
+  );
+
+
+  setBar(
+    'tSudahBar',
+    teknisPct
+  );
+
+  setBar(
+    'tBelumBar',
+    percentage(
+      s.teknisBelumDapodik,
+      s.teknis
+    )
+  );
+
+
+  // ========================================================
+  // SCOPE
+  // ========================================================
+
+  setText(
+    'scopeText',
+    currentRole === 'DINAS'
+      ? 'Akses: Seluruh Cabang Dinas I - XIV'
+      : 'Akses: ' + currentCabdis
+  );
+
+
+  // ========================================================
+  // UPDATE TIME
+  // ========================================================
+
+  const dt =
+    new Date(
+      res.updateTime
+    );
+
+
+  setText(
+    'updateTime',
+    dt.toLocaleString(
+      'id-ID'
+    )
+  );
+
+
+  // ========================================================
+  // FILTER OPTIONS
+  // ========================================================
+
+  updateSelect(
+    'filterKabupaten',
+    res.kabupatenList,
+    'Semua Kabupaten / Kota'
+  );
+
+
+  updateSelect(
+    'filterJenjang',
+    res.jenjangList,
+    'Semua Jenjang'
+  );
+
+
+  // ========================================================
+  // REKAP KABUPATEN
+  // ========================================================
+
+  renderKabupaten(
+    s.kabupaten
+  );
+
+
+  // ========================================================
+  // REKAP CABDIS
+  // ========================================================
+
+  if(
+    res.isDinas
+  ){
+
+    document
+      .getElementById(
+        'cabdisSection'
+      )
+      .style.display =
+      'block';
+
+
+    renderCabdis(
+      res.cabdisRekap
+    );
+
+  }
+
+  // Muat daftar data GTK sesuai hak akses + filter aktif.
+  loadGtkRecords(false, 1);
+
+}
+
+
+// ==========================================================
+// UPDATE SELECT
+// ==========================================================
+
+function updateSelect(
+  id,
+  values,
+  firstText
+){
+
+  const select =
+    document
+      .getElementById(id);
+
+
+  const current =
+    select.value;
+
+
+  select.innerHTML = '';
+
+
+  const first =
+    document.createElement(
+      'option'
+    );
+
+  first.value =
+    'SEMUA';
+
+  first.textContent =
+    firstText;
+
+  select.appendChild(
+    first
+  );
+
+
+  values.forEach(
+    function(value){
+
+      const option =
+        document.createElement(
+          'option'
+        );
+
+      option.value =
+        value;
+
+      option.textContent =
+        value;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  // Pertahankan pilihan filter
+
+  if(
+    values.indexOf(current)
+    >= 0
+  ){
+
+    select.value =
+      current;
+
+  }else{
+
+    select.value =
+      'SEMUA';
+
+  }
+
+}
+
+
+// ==========================================================
+// REKAP KABUPATEN
+// ==========================================================
+
+function renderKabupaten(data){
+
+  const tbody =
+    document
+      .getElementById(
+        'kabupatenTable'
+      );
+
+
+  tbody.innerHTML = '';
+
+
+  const list =
+    Object.values(data)
+      .sort(
+        function(a,b){
+
+          return a.kabupaten
+            .localeCompare(
+              b.kabupaten
+            );
+
+        }
+      );
+
+
+  list.forEach(
+    function(k){
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      tr.innerHTML =
+
+        '<td><b>' +
+        escapeHtml(
+          k.kabupaten
+        ) +
+        '</b></td>' +
+
+        '<td>' +
+        formatNumber(k.total) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guru) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknis) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruBelumDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruSertifikasi) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruBelumSertifikasi) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknisDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknisBelumDapodik) +
+        '</td>';
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+// ==========================================================
+// REKAP CABDIS
+// ==========================================================
+
+function renderCabdis(data){
+
+  const tbody =
+    document
+      .getElementById(
+        'cabdisTable'
+      );
+
+
+  tbody.innerHTML = '';
+
+
+  data.forEach(
+    function(k){
+
+      const tr =
+        document.createElement(
+          'tr'
+        );
+
+
+      tr.innerHTML =
+
+        '<td><b>' +
+        escapeHtml(k.cabdis) +
+        '</b></td>' +
+
+        '<td>' +
+        formatNumber(k.total) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guru) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknis) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruBelumDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruSertifikasi) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.guruBelumSertifikasi) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknisDapodik) +
+        '</td>' +
+
+        '<td>' +
+        formatNumber(k.teknisBelumDapodik) +
+        '</td>';
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+// ==========================================================
+// DOWNLOAD EXCEL
+// ==========================================================
+
+function downloadExcel(){
+
+  if(currentRole !== 'CABDIS'){
+    alert('Download hanya tersedia untuk akun Cabang Dinas.');
+    return;
+  }
+
+  const filters = getFilters();
+  showLoading();
+
+  let finished = false;
+  const timeout = setTimeout(function(){
+    if(!finished){
+      hideLoading();
+      alert('Proses download terlalu lama. Silakan coba lagi.');
+    }
+  }, 45000);
+
+  google.script.run
+    .withSuccessHandler(function(res){
+      finished = true;
+      clearTimeout(timeout);
+      hideLoading();
+
+      if(!res || !res.success || !res.data){
+        alert((res && res.message) ? res.message : 'File Excel tidak berhasil dibuat.');
+        return;
+      }
+
+      const byteCharacters = atob(res.data);
+      const chunkSize = 8192;
+      const chunks = [];
+
+      for(let offset = 0; offset < byteCharacters.length; offset += chunkSize){
+        const slice = byteCharacters.slice(offset, offset + chunkSize);
+        const bytes = new Uint8Array(slice.length);
+        for(let i = 0; i < slice.length; i++){
+          bytes[i] = slice.charCodeAt(i);
+        }
+        chunks.push(bytes);
+      }
+
+      const blob = new Blob(chunks, {type: res.mimeType});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = res.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    })
+    .withFailureHandler(function(err){
+      finished = true;
+      clearTimeout(timeout);
+      hideLoading();
+      alert('Gagal download:\n' + (err && err.message ? err.message : 'Terjadi kesalahan.'));
+    })
+    .downloadExcel(token, filters);
+}
+
+
+
+// ==========================================================
+// DATA GTK - LOAD / SEARCH / PAGINATION
+// ==========================================================
+let gtkPage = 1;
+const gtkPageSize = 50;
+let gtkTotalPages = 0;
+let gtkSearchText = '';
+let gtkRecordsCache = {};
+
+function loadGtkRecords(showBusy = false, page = 1){
+
+  if(!token){
+    return;
+  }
+
+  gtkPage = page || 1;
+
+  if(showBusy){
+    showLoading();
+  }
+
+  google.script.run
+    .withSuccessHandler(function(res){
+
+      if(showBusy){
+        hideLoading();
+      }
+
+      if(!res || !res.success){
+        renderGtkRecordsEmpty(
+          res && res.message ? res.message : 'Data tidak dapat dimuat.'
+        );
+        return;
+      }
+
+      gtkPage = res.page || 1;
+      gtkTotalPages = res.totalPages || 0;
+      gtkRecordsCache = {};
+
+      (res.records || []).forEach(function(record){
+        gtkRecordsCache[String(record.rowNumber)] = record;
+      });
+
+      renderGtkRecords(res.records || [], res.total || 0);
+    })
+    .withFailureHandler(function(err){
+
+      if(showBusy){
+        hideLoading();
+      }
+
+      renderGtkRecordsEmpty(
+        'Gagal memuat data: ' +
+        (err && err.message ? err.message : 'Terjadi kesalahan.')
+      );
+    })
+    .getGtkRecords(
+      token,
+      getFilters(),
+      gtkSearchText,
+      gtkPage,
+      gtkPageSize
+    );
+}
+
+function searchGtkRecords(){
+  gtkSearchText = String(
+    document.getElementById('gtkSearch').value || ''
+  ).trim();
+  gtkPage = 1;
+  loadGtkRecords(true, 1);
+}
+
+function clearGtkSearch(){
+  document.getElementById('gtkSearch').value = '';
+  gtkSearchText = '';
+  gtkPage = 1;
+  loadGtkRecords(true, 1);
+}
+
+// ==========================================================
+// LANGSUNG KE DATA GTK
+// ==========================================================
+function scrollToGtkData(){
+  const section = document.getElementById('gtkDataSection');
+  if(!section){ return; }
+
+  section.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+  setTimeout(function(){
+    const search = document.getElementById('gtkSearch');
+    if(search){ search.focus(); }
+  }, 500);
+}
+
+function changeGtkPage(delta){
+  const next = gtkPage + delta;
+
+  if(next < 1 || (gtkTotalPages > 0 && next > gtkTotalPages)){
+    return;
+  }
+
+  loadGtkRecords(true, next);
+}
+
+function renderGtkRecords(records, total){
+
+  const tbody = document.getElementById('gtkDataTable');
+  if(!tbody){ return; }
+
+  tbody.innerHTML = '';
+
+  if(!records || records.length === 0){
+    renderGtkRecordsEmpty('Tidak ada data sesuai filter / pencarian.');
+    updateGtkPagination(total || 0);
+    return;
+  }
+
+  records.forEach(function(r, index){
+
+    const tr = document.createElement('tr');
+    const no = ((gtkPage - 1) * gtkPageSize) + index + 1;
+
+    let action = '<span class="gtkReadOnly">LIHAT SAJA</span>';
+
+    if(currentRole === 'CABDIS'){
+      action =
+        '<button type="button" class="gtkAction" onclick="openGtkEdit(\'' +
+        String(r.rowNumber) +
+        '\')">✏ EDIT</button>';
+    }
+
+    tr.innerHTML =
+      '<td>' + no + '</td>' +
+      '<td><b>' + escapeHtml(r['NAMA']) + '</b></td>' +
+      '<td>' + escapeHtml(r['NIK']) + '</td>' +
+      '<td>' + escapeHtml(r['SEKOLAH']) + '</td>' +
+      '<td>' + escapeHtml(r['NPSN']) + '</td>' +
+      '<td>' + escapeHtml(r['KABUPATEN / KOTA']) + '</td>' +
+      '<td>' + escapeHtml(r['JENJANG']) + '</td>' +
+      '<td>' + escapeHtml(r['JENIS']) + '</td>' +
+      '<td>' + escapeHtml(r['STATUS DAPODIK']) + '</td>' +
+      '<td>' + escapeHtml(r['STATUS SERTIFIKASI']) + '</td>' +
+      '<td>' + escapeHtml(r['NOMOR SK PERTAMA']) + '</td>' +
+      '<td>' + escapeHtml(r['TANGGAL SK PERTAMA']) + '</td>' +
+      '<td>' + action + '</td>';
+
+    tbody.appendChild(tr);
+  });
+
+  updateGtkPagination(total || 0);
+}
+
+function renderGtkRecordsEmpty(message){
+  const tbody = document.getElementById('gtkDataTable');
+  if(!tbody){ return; }
+  tbody.innerHTML =
+    '<tr><td colspan="13" style="padding:25px;color:#64748b;">' +
+    escapeHtml(message || 'Tidak ada data.') +
+    '</td></tr>';
+}
+
+function updateGtkPagination(total){
+  const info = document.getElementById('gtkPageInfo');
+  const prev = document.getElementById('gtkPrevBtn');
+  const next = document.getElementById('gtkNextBtn');
+
+  if(info){
+    if(total === 0){
+      info.textContent = '0 data';
+    }else{
+      const start = ((gtkPage - 1) * gtkPageSize) + 1;
+      const end = Math.min(gtkPage * gtkPageSize, total);
+      info.textContent =
+        'Menampilkan ' + formatNumber(start) +
+        '–' + formatNumber(end) +
+        ' dari ' + formatNumber(total) +
+        ' data | Halaman ' + gtkPage +
+        ' / ' + (gtkTotalPages || 1);
+    }
+  }
+
+  if(prev){
+    prev.disabled = gtkPage <= 1;
+  }
+
+  if(next){
+    next.disabled = gtkTotalPages === 0 || gtkPage >= gtkTotalPages;
+  }
+}
+
+// ==========================================================
+// OPEN MODAL EDIT
+// ==========================================================
+function openGtkEdit(rowNumber){
+
+  if(currentRole !== 'CABDIS'){
+    alert('Akun ini hanya dapat melihat data.');
+    return;
+  }
+
+  const r = gtkRecordsCache[String(rowNumber)];
+
+  if(!r){
+    alert('Data edit tidak ditemukan. Silakan refresh data.');
+    return;
+  }
+
+  setValue('editRowNumber', r.rowNumber);
+  setValue('editNIK', r['NIK']);
+  setValue('editCabdis', r['CABANG DINAS']);
+  setValue('editNama', r['NAMA']);
+  setValue('editSekolah', r['SEKOLAH']);
+  setValue('editNpsn', r['NPSN']);
+  setValue('editKabupaten', r['KABUPATEN / KOTA']);
+  setValue('editJenjang', r['JENJANG']);
+  setValue('editJenis', r['JENIS']);
+  setValue('editPengangkatan', r['PENGANGKATAN']);
+  setValue('editDapodik', r['STATUS DAPODIK']);
+  setValue('editSertifikasi', r['STATUS SERTIFIKASI']);
+  setValue('editNomorSk', r['NOMOR SK PERTAMA']);
+  setValue('editTanggalSk', toDateInputValue(r['TANGGAL SK PERTAMA']));
+  setValue('editTahunSk', r['TAHUN SK PERTAMA']);
+
+  const msg = document.getElementById('gtkEditMessage');
+  msg.style.display = 'none';
+  msg.textContent = '';
+
+  document.getElementById('gtkEditModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGtkEdit(){
+  document.getElementById('gtkEditModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function setValue(id, value){
+  const el = document.getElementById(id);
+  if(el){
+    el.value = value == null ? '' : value;
+  }
+}
+
+function toDateInputValue(value){
+  const s = String(value || '').trim();
+  if(!s){ return ''; }
+
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m){ return m[1] + '-' + m[2] + '-' + m[3]; }
+
+  m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+  if(m){
+    return m[3] + '-' +
+      String(m[2]).padStart(2,'0') + '-' +
+      String(m[1]).padStart(2,'0');
+  }
+
+  const d = new Date(s);
+  if(!isNaN(d.getTime())){
+    return d.getFullYear() + '-' +
+      String(d.getMonth()+1).padStart(2,'0') + '-' +
+      String(d.getDate()).padStart(2,'0');
+  }
+
+  return '';
+}
+
+// ==========================================================
+// SIMPAN EDIT KE SPREADSHEET
+// ==========================================================
+function saveGtkEdit(){
+
+  if(currentRole !== 'CABDIS'){
+    alert('Akun ini tidak memiliki hak edit.');
+    return;
+  }
+
+  const rowNumber = document.getElementById('editRowNumber').value;
+  const nama = document.getElementById('editNama').value.trim();
+  const sekolah = document.getElementById('editSekolah').value.trim();
+  const npsn = document.getElementById('editNpsn').value.replace(/\D/g,'');
+
+  if(!nama){
+    showGtkEditMessage('Nama wajib diisi.', true);
+    return;
+  }
+
+  if(!sekolah){
+    showGtkEditMessage('Sekolah wajib diisi.', true);
+    return;
+  }
+
+  if(npsn && !/^\d{8}$/.test(npsn)){
+    showGtkEditMessage('NPSN harus 8 digit angka.', true);
+    return;
+  }
+
+  const tahunSk = document.getElementById('editTahunSk').value
+    .replace(/\D/g,'')
+    .slice(0,4);
+
+  if(tahunSk && !/^\d{4}$/.test(tahunSk)){
+    showGtkEditMessage('Tahun SK harus 4 digit.', true);
+    return;
+  }
+
+  const data = {
+    'KABUPATEN / KOTA': document.getElementById('editKabupaten').value.trim(),
+    'JENJANG': document.getElementById('editJenjang').value.trim(),
+    'SEKOLAH': sekolah,
+    'NPSN': npsn,
+    'PENGANGKATAN': document.getElementById('editPengangkatan').value.trim(),
+    'STATUS DAPODIK': document.getElementById('editDapodik').value,
+    'STATUS SERTIFIKASI': document.getElementById('editSertifikasi').value,
+    'JENIS': document.getElementById('editJenis').value,
+    'NAMA': nama,
+    'NOMOR SK PERTAMA': document.getElementById('editNomorSk').value.trim(),
+    'TANGGAL SK PERTAMA': document.getElementById('editTanggalSk').value,
+    'TAHUN SK PERTAMA': tahunSk
+  };
+
+  const btn = document.getElementById('gtkSaveBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ MENYIMPAN...';
+  showGtkEditMessage('Menyimpan perubahan ke Spreadsheet...', false);
+
+  google.script.run
+    .withSuccessHandler(function(res){
+      btn.disabled = false;
+      btn.textContent = '💾 SIMPAN PERUBAHAN';
+
+      if(!res || !res.success){
+        showGtkEditMessage(
+          res && res.message ? res.message : 'Gagal menyimpan data.',
+          true
+        );
+        return;
+      }
+
+      showGtkEditMessage('✓ Data berhasil diperbarui di Spreadsheet.', false);
+
+      setTimeout(function(){
+        closeGtkEdit();
+        loadDashboard(false);
+      }, 700);
+    })
+    .withFailureHandler(function(err){
+      btn.disabled = false;
+      btn.textContent = '💾 SIMPAN PERUBAHAN';
+      showGtkEditMessage(
+        'Gagal menyimpan: ' +
+        (err && err.message ? err.message : 'Terjadi kesalahan.'),
+        true
+      );
+    })
+    .updateGtkRecord(token, rowNumber, data);
+}
+
+function showGtkEditMessage(text, error){
+  const el = document.getElementById('gtkEditMessage');
+  if(!el){ return; }
+  el.style.display = 'block';
+  el.textContent = text;
+  el.style.background = error ? '#fee2e2' : '#dcfce7';
+  el.style.color = error ? '#991b1b' : '#166534';
+}
+
+
+// ==========================================================
+// RESET
+// ==========================================================
+
+function resetFilter(){
+
+  document
+    .getElementById(
+      'filterKabupaten'
+    )
+    .value =
+    'SEMUA';
+
+  document
+    .getElementById(
+      'filterJenjang'
+    )
+    .value =
+    'SEMUA';
+
+  document
+    .getElementById(
+      'filterTahun'
+    )
+    .value =
+    'SEMUA';
+
+  document
+    .getElementById(
+      'filterJenis'
+    )
+    .value =
+    'SEMUA';
+
+  document
+    .getElementById(
+      'filterDapodik'
+    )
+    .value =
+    'SEMUA';
+
+  document
+    .getElementById(
+      'filterSertifikasi'
+    )
+    .value =
+    'SEMUA';
+
+
+  loadDashboard();
+
+}
+
+
+// ==========================================================
+// LOGOUT
+// ==========================================================
+
+function logoutUser(){
+
+  if(refreshTimer){
+
+    clearInterval(
+      refreshTimer
+    );
+
+  }
+
+
+  google.script.run
+    .logout(token);
+
+
+  token = '';
+
+  currentRole = '';
+
+  currentCabdis = '';
+
+
+  document
+    .getElementById(
+      'dashboardPage'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'loginPage'
+    )
+    .style.display =
+    'grid';
+
+
+  document
+    .getElementById(
+      'password'
+    )
+    .value =
+    '';
+
+}
+
+
+// ==========================================================
+// UTILITY
+// ==========================================================
+
+function setText(
+  id,
+  value
+){
+
+  const el =
+    document.getElementById(id);
+
+  if(el){
+
+    el.textContent =
+      value;
+
+  }
+
+}
+
+
+function setBar(
+  id,
+  value
+){
+
+  const el =
+    document.getElementById(id);
+
+  if(el){
+
+    el.style.width =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          value
+        )
+      ) + '%';
+
+  }
+
+}
+
+
+function percentage(
+  value,
+  total
+){
+
+  if(
+    !total ||
+    total === 0
+  ){
+
+    return 0;
+
+  }
+
+  return Math.round(
+    (value / total) *
+    1000
+  ) / 10;
+
+}
+
+
+function formatNumber(
+  value
+){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    'id-ID'
+  );
+
+}
+
+
+function escapeHtml(
+  value
+){
+
+  return String(value || '')
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+function showLoading(){
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'flex';
+
+}
+
+
+function hideLoading(){
+
+  document
+    .getElementById(
+      'loading'
+    )
+    .style.display =
+    'none';
+
+}
+
+
+// ==========================================================
+// ENTER UNTUK LOGIN
+// ==========================================================
+
+document
+  .getElementById(
+    'password'
+  )
+  .addEventListener(
+    'keydown',
+    function(e){
+
+      if(
+        e.key === 'Enter'
+      ){
+
+        loginUser();
+
+      }
+
+    }
+  );
+
+
+
+
+// ==========================================================
+// AKSES PUBLIK VIA NIK - SISTEM PEMUTAKHIRAN HONORER
+// ==========================================================
+
+function formatNIK(input){
+  input.value = input.value.replace(/\D/g,'').slice(0,16);
+}
+
+function nikMessage(text, error){
+  const el = document.getElementById('nikMessage');
+  el.style.display = 'block';
+  el.textContent = text;
+  el.style.background = error ? '#fee2e2' : '#dcfce7';
+  el.style.color = error ? '#991b1b' : '#166534';
+}
+
+// Format tanggal SK tanpa mengganggu fungsi lain.
+function formatTanggalSK(value){
+  if(value === null || value === undefined || value === ''){
+    return '-';
+  }
+
+  // Jika Apps Script mengirim Date sebagai string ISO.
+  const d = new Date(value);
+
+  if(!isNaN(d.getTime())){
+    return d.toLocaleDateString('id-ID', {
+      day:'2-digit',
+      month:'2-digit',
+      year:'numeric'
+    });
+  }
+
+  // Jika sudah berupa teks tanggal biasa, tampilkan apa adanya.
+  return String(value).trim() || '-';
+}
+
+function cariDataNIK(){
+
+  const input = document.getElementById('nikSearch');
+  const nik = String(input.value || '').replace(/\D/g,'').slice(0,16);
+  input.value = nik;
+
+  const result = document.getElementById('nikResult');
+  result.style.display = 'none';
+
+  // Bersihkan hasil lama
+  setText('nikNama','-');
+  setText('nikSekolah','-');
+  setText('nikNpsn','-');
+  setText('nikNomorSk','-');
+  setText('nikTanggalSk','-');
+
+  if(!/^\d{16}$/.test(nik)){
+    nikMessage('NIK harus terdiri dari 16 digit angka.', true);
+    input.focus();
+    return;
+  }
+
+  nikMessage('Sedang memeriksa data...', false);
+
+  google.script.run
+    .withSuccessHandler(function(res){
+
+      if(!res || res.success !== true){
+        nikMessage(
+          res && res.message
+            ? res.message
+            : 'Data NIK tidak ditemukan.',
+          true
+        );
+        return;
+      }
+
+      document.getElementById('nikSuccessTitle').textContent =
+        res.statusMessage ||
+        'ANDA SUDAH MENGISI DATA PEMUTAKHIRAN HONORER';
+
+      setText('nikNama', res.nama || '-');
+      setText('nikSekolah', res.sekolah || '-');
+      setText('nikNpsn', res.npsn || '-');
+      setText('nikNomorSk', res.nomorSk || '-');
+
+      const tanggalSK =
+        res.tanggalSk ||
+        res.tanggalSK ||
+        res.tglSk ||
+        res.tanggalSkPertama ||
+        res.tanggalSkPengangkatan ||
+        res.tanggalPengangkatan ||
+        '';
+
+      setText(
+        'nikTanggalSk',
+        formatTanggalSK(tanggalSK)
+      );
+
+      result.style.display = 'block';
+      nikMessage('✓ Data NIK ditemukan.', false);
+
+      result.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+    })
+    .withFailureHandler(function(err){
+
+      result.style.display = 'none';
+
+      nikMessage(
+        'Gagal memeriksa data: ' +
+        (err && err.message
+          ? err.message
+          : 'Terjadi kesalahan.'),
+        true
+      );
+
+    })
+    .getHonorDataByNIK(nik);
+}
+
+
+// ==========================================================
+// AKSES SEKOLAH VIA NPSN - TANPA LOGIN
+// ==========================================================
+
+function formatNPSN(input){
+  input.value = input.value.replace(/\D/g,'').slice(0,8);
+}
+
+function npsnMessage(text, error){
+  const el = document.getElementById('npsnMessage');
+  el.style.display = 'block';
+  el.textContent = text;
+  el.style.background = error ? '#fee2e2' : '#dcfce7';
+  el.style.color = error ? '#991b1b' : '#166534';
+}
+
+function cariSekolahNPSN(){
+  const npsn = document.getElementById('npsnSearch').value.trim();
+  document.getElementById('npsnResult').style.display = 'none';
+
+  if(!/^\d{8}$/.test(npsn)){
+    npsnMessage('NPSN harus terdiri dari 8 digit angka.', true);
+    return;
+  }
+
+  npsnMessage('Sedang mengambil data terbaru...', false);
+
+  google.script.run
+    .withSuccessHandler(function(res){
+      if(!res || !res.success){
+        npsnMessage(res && res.message ? res.message : 'Data sekolah tidak ditemukan.', true);
+        return;
+      }
+      renderSchoolNPSN(res);
+      npsnMessage('✓ Data sekolah ditemukan.', false);
+    })
+    .withFailureHandler(function(err){
+      npsnMessage('Gagal mengambil data: ' + (err && err.message ? err.message : 'Terjadi kesalahan.'), true);
+    })
+    .getSchoolByNPSN(npsn);
+}
+
+function renderSchoolNPSN(res){
+  const s = res.school || {};
+  setText('schoolName', s.sekolah || '-');
+  setText('schoolNpsn', 'NPSN: ' + (s.npsn || '-'));
+  setText('schoolKabupaten', s.kabupaten || '-');
+  setText('schoolCabdis', s.cabdis || '-');
+  setText('schoolJenjang', s.jenjang || '-');
+  setText('schoolUpdate', formatNPSNDate(res.updateTime));
+
+  renderSchoolStats('schoolAll', res.stats && res.stats.all);
+  renderSchoolStats('school2020', res.stats && res.stats.tahun2020);
+  renderSchoolStats('school2021', res.stats && res.stats.tahun2021);
+  renderSchoolStats('school2022', res.stats && res.stats.tahun2022);
+  renderSchoolStats('school2023', res.stats && res.stats.tahun2023);
+  renderSchoolStats('school2024', res.stats && res.stats.tahun2024);
+  renderSchoolStats('school2025', res.stats && res.stats.tahun2025);
+  renderSchoolStats('school2026', res.stats && res.stats.tahun2026);
+
+  document.getElementById('npsnResult').style.display = 'block';
+  document.getElementById('npsnResult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderSchoolStats(id, s){
+  const box = document.getElementById(id);
+  box.innerHTML = '';
+  if(!s){
+    addSchoolStat(box, 0, 'Belum ada data');
+    return;
+  }
+  addSchoolStat(box, s.guru, 'Guru');
+  addSchoolStat(box, s.guruDapodik, 'Guru Sudah Dapodik');
+  addSchoolStat(box, s.guruBelumDapodik, 'Guru Belum Dapodik');
+  addSchoolStat(box, s.guruSertifikasi, 'Guru Sertifikasi');
+  addSchoolStat(box, s.guruBelumSertifikasi, 'Guru Belum Sertifikasi');
+  addSchoolStat(box, s.teknis, 'Tendik / Teknis');
+  addSchoolStat(box, s.teknisDapodik, 'Teknis Sudah Dapodik');
+  addSchoolStat(box, s.teknisBelumDapodik, 'Teknis Belum Dapodik');
+}
+
+function addSchoolStat(box, value, label){
+  const d = document.createElement('div');
+  d.className = 'npsnStat';
+  const b = document.createElement('b');
+  b.textContent = Number(value || 0).toLocaleString('id-ID');
+  const span = document.createElement('span');
+  span.textContent = label;
+  d.appendChild(b);
+  d.appendChild(span);
+  box.appendChild(d);
+}
+
+function formatNPSNDate(value){
+  if(!value) return '-';
+  const d = new Date(value);
+  if(isNaN(d.getTime())) return value;
+  return d.toLocaleString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function downloadSchoolExcelNPSN(){
+  const npsn = document.getElementById('npsnSearch').value.trim();
+
+  if(!/^\d{8}$/.test(npsn)){
+    npsnMessage('NPSN harus terdiri dari 8 digit angka.', true);
+    return;
+  }
+
+  const btn = document.querySelector('.npsnDownload');
+  if(btn){ btn.disabled = true; btn.textContent = '⏳ MENYIAPKAN EXCEL...'; }
+  npsnMessage('Menyiapkan Excel data sekolah...', false);
+  let schoolDownloadFinished = false;
+  const schoolDownloadTimeout = setTimeout(function(){
+    if(!schoolDownloadFinished){
+      if(btn){ btn.disabled = false; btn.textContent = '⬇ DOWNLOAD EXCEL SEKOLAH'; }
+      npsnMessage('Proses download terlalu lama. Silakan tekan tombol lagi.', true);
+    }
+  }, 45000);
+
+  google.script.run
+    .withSuccessHandler(function(res){
+      schoolDownloadFinished = true;
+      clearTimeout(schoolDownloadTimeout);
+      if(btn){ btn.disabled = false; btn.textContent = '⬇ DOWNLOAD EXCEL SEKOLAH'; }
+
+      if(!res || !res.success){
+        npsnMessage(res && res.message ? res.message : 'Gagal membuat Excel sekolah.', true);
+        return;
+      }
+
+      // Decode base64 secara bertahap agar browser tidak tersendat
+      // saat file Excel sedikit lebih besar.
+      const byteCharacters = atob(res.data);
+      const chunkSize = 8192;
+      const chunks = [];
+
+      for(let offset = 0; offset < byteCharacters.length; offset += chunkSize){
+        const slice = byteCharacters.slice(offset, offset + chunkSize);
+        const bytes = new Uint8Array(slice.length);
+        for(let i = 0; i < slice.length; i++){
+          bytes[i] = slice.charCodeAt(i);
+        }
+        chunks.push(bytes);
+      }
+
+      const blob = new Blob(chunks, {type: res.mimeType});
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = res.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      npsnMessage('✓ Excel berhasil dibuat dan diunduh.', false);
+    })
+    .withFailureHandler(function(err){
+      schoolDownloadFinished = true;
+      clearTimeout(schoolDownloadTimeout);
+      if(btn){ btn.disabled = false; btn.textContent = '⬇ DOWNLOAD EXCEL SEKOLAH'; }
+      npsnMessage('Gagal download: ' + (err && err.message ? err.message : 'Terjadi kesalahan.'), true);
+    })
+    .downloadSchoolExcelByNPSN(npsn);
+}
+
+function tutupNPSN(){
+  document.getElementById('npsnResult').style.display = 'none';
+  document.getElementById('npsnSearch').value = '';
+  document.getElementById('npsnMessage').style.display = 'none';
+}
+
+
+
+// Tutup modal jika klik area gelap di luar kotak edit.
+document.getElementById('gtkEditModal').addEventListener('click', function(e){
+  if(e.target === this){
+    closeGtkEdit();
+  }
+});
+
+</script>
+
+</body>
+
+</html>
